@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+   
+   eventsapi:
+     build: .
+     image: xxxxx.azurecr.io/event-service:${TAG}
+     container_name: event-service
+     ports: 
+       - 8082:8082
+
+   mongodb: 
+     image: mongo:4.2.2
+     container_name: mongodb
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USR}
+       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PW}
+     volumes:
+       - ./mongo_data:/data/db
+     ports: 
+       - 27017:27017
+
+   mongo-express:
+     image: mongo-express:0.49.0
+     container_name: mongodb-express-ui
+     environment:
+       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGOE_ROOT_USR}
+       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGOE_ROOT_PW}
+       ME_CONFIG_MONGODB_SERVER: ${MONGO_SERVER}
+     ports: 
+       - 8083:8081
+    

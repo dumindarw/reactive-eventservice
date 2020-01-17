@@ -1,0 +1,9 @@
+server:
+  port: 8082
+  
+spring:
+  data:
+    mongodb:
+      url: mongodb://mongodb:27017/events
+  application:
+    name: event-service
